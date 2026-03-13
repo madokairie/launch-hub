@@ -58,9 +58,7 @@ const PHASES: Phase[] = [
         icon: '🎯',
         phase: 'strategy',
         tips: '全ての土台。USP・ターゲット・ポジショニングを固める。ここが曖昧だと後の全工程がブレる',
-        inputsFrom: [
-          { appId: 'movie', what: '競合リサーチ結果' },
-        ],
+        inputsFrom: [],
         outputsTo: [
           { appId: 'funnel', what: 'コンセプトシート・セールスポイント' },
           { appId: 'contentgift', what: 'ターゲット情報・商品コンセプト' },
