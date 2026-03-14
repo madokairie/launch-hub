@@ -86,6 +86,7 @@ const PHASES: Phase[] = [
         tips: '全ての土台。USP・ターゲット・ポジショニングを固める。ここが曖昧だと後の全工程がブレる',
         inputsFrom: [],
         outputsTo: [
+          { appId: 'offer', what: 'ターゲット・USP・商品コンセプト' },
           { appId: 'funnel', what: 'コンセプトシート・セールスポイント' },
           { appId: 'contentgift', what: 'ターゲット情報・商品コンセプト' },
           { appId: 'vsl', what: 'メッセージ・ペルソナ情報' },
@@ -96,11 +97,29 @@ const PHASES: Phase[] = [
         ],
       },
       {
+        id: 'offer', name: 'オファー設計',
+        description: '価格・特典・保証・パッケージ・緊急性を設計し、売れるオファーを組む',
+        port: 3907, icon: '💎', phase: 'strategy',
+        tips: 'コンセプトが固まったら、価格帯・松竹梅・ボーナス特典・保証（リスクリバーサル）・緊急性を設計。オファーの強さが成約率を決める',
+        inputsFrom: [{ appId: 'concept', what: 'ターゲット・USP・商品コンセプト' }],
+        outputsTo: [
+          { appId: 'funnel', what: '価格帯・オファー構成' },
+          { appId: 'vsl', what: 'オファー内容・価格・特典・保証' },
+          { appId: 'seminar', what: 'オファー提示パート用の素材' },
+          { appId: 'salesconsultant', what: 'オファー詳細・反論処理材料' },
+          { appId: 'lp', what: '価格表・特典リスト・保証バッジ' },
+          { appId: 'postcreate', what: 'オファー告知用の素材' },
+        ],
+      },
+      {
         id: 'funnel', name: 'ファネル設計',
         description: 'ローンチ全体のファネル構造を設計する',
         port: 3800, icon: '🏗️', phase: 'strategy',
         tips: 'コンセプトが決まったら、集客→教育→販売の流れを設計。各ステップの役割・CVR目安・導線を明確にする',
-        inputsFrom: [{ appId: 'concept', what: 'コンセプト・セールスポイント' }],
+        inputsFrom: [
+          { appId: 'concept', what: 'コンセプト・セールスポイント' },
+          { appId: 'offer', what: '価格帯・オファー構成' },
+        ],
         outputsTo: [
           { appId: 'contentgift', what: '特典の用途・ポジション定義' },
           { appId: 'seminar', what: 'ファネル内のセミナー位置づけ' },
@@ -308,11 +327,14 @@ const SCHEDULE_PHASES: SchedulePhase[] = [
     tasks: [
       { id: 'sp1-1', appId: 'concept', label: 'ターゲット・ペルソナ・USPを定義する' },
       { id: 'sp1-2', appId: 'concept', label: 'メインコピー・価値提案を言語化する' },
-      { id: 'sp1-3', appId: 'concept', label: '価格・特典・保証を設定する' },
-      { id: 'sp1-4', appId: 'concept', label: 'コンセプトシートを出力する' },
-      { id: 'sp1-5', appId: 'funnel', label: '集客→教育→販売のファネル構造を設計する' },
-      { id: 'sp1-6', appId: 'funnel', label: '各ステップのCVR目安・導線を設定する' },
-      { id: 'sp1-7', appId: 'movie', label: '競合の動画・プロモーションをリサーチする（任意）' },
+      { id: 'sp1-3', appId: 'concept', label: 'コンセプトシートを出力する' },
+      { id: 'sp1-4', appId: 'offer', label: '価格帯・松竹梅プランを設計する' },
+      { id: 'sp1-5', appId: 'offer', label: '特典スタッキング（ボーナス）を組む' },
+      { id: 'sp1-6', appId: 'offer', label: '保証（リスクリバーサル）を設定する' },
+      { id: 'sp1-7', appId: 'offer', label: '緊急性・希少性の要素を決める' },
+      { id: 'sp1-8', appId: 'funnel', label: '集客→教育→販売のファネル構造を設計する' },
+      { id: 'sp1-9', appId: 'funnel', label: '各ステップのCVR目安・導線を設定する' },
+      { id: 'sp1-10', appId: 'movie', label: '競合の動画・プロモーションをリサーチする（任意）' },
     ],
   },
   {
